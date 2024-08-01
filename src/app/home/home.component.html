@@ -1,0 +1,9 @@
+<section class="results" *ngIf="employees.length > 0; else noEmployees">
+  <app-employee-listing
+    *ngFor="let employee of employees"
+    [employee]="employee"
+  ></app-employee-listing>
+</section>
+<ng-template #noEmployees>
+  <span>Employees not loaded yet or not found!</span>
+</ng-template>
