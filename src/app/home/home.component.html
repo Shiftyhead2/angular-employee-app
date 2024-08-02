@@ -1,9 +1,26 @@
-<section class="results" *ngIf="employees.length > 0; else noEmployees">
+<section class="filterFormSection">
+  <form [formGroup]="filterForm">
+    <label>Filtriraj po</label>
+    <select formControlName="filterSelect" (change)="applyFilter()">
+      <option *ngFor="let filterOption of filterOptions" [value]="filterOption">
+        {{ filterOption }}
+      </option>
+    </select>
+    <input
+      type="text"
+      placeholder="Upišite ovdje"
+      formControlName="filterInput"
+      (input)="filterEmployeesBy()"
+    />
+  </form>
+</section>
+
+<section class="results" *ngIf="filteredEmployees.length > 0; else noEmployees">
   <app-employee-listing
-    *ngFor="let employee of employees"
+    *ngFor="let employee of filteredEmployees"
     [employee]="employee"
   ></app-employee-listing>
 </section>
 <ng-template #noEmployees>
-  <span>Employees not loaded yet or not found!</span>
+  <span>Employee not found!</span>
 </ng-template>

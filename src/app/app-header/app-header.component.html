@@ -1,8 +1,24 @@
 <header>
   <nav>
     <ul class="navigation">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">New employee</a></li>
+      <li>
+        <a
+          routerLink=""
+          [routerLinkActive]="['', 'active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="employee-form"
+          [routerLinkActive]="['', 'active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          New employee
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
