@@ -5,12 +5,17 @@ import { EmployeeFormComponent } from './employee-form/employee-form.component';
 export const routes: Routes = [
   {
     path: '',
-    title: 'Home',
-    component:HomeComponent,
+    redirectTo: '/home',
+    pathMatch:'full'
   },
   {
     path: 'employee-form',
     title: 'Employee Form',
     component:EmployeeFormComponent,
-  }
+  },
+  {
+    path: 'home',
+    title: 'Home',
+    component:HomeComponent,
+  },
 ];

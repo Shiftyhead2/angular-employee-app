@@ -1,1 +1,35 @@
-<p>employee-form works!</p>
+<section class="employeeForm">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <label for="firstName">Ime</label>
+    <input
+      id="firstName"
+      type="text"
+      formControlName="firstName"
+      placeholder="John"
+    />
+    <label for="lastName">Prezime</label>
+    <input
+      id="lastName"
+      type="text"
+      formControlName="lastName"
+      placeholder="Doe"
+    />
+    <label for="dateOfBirth">Datum rođenja</label>
+    <input
+      id="dateOfBirth"
+      type="text"
+      formControlName="dateOfBirth"
+      placeholder="DD/MM/YYYY"
+    />
+    <label for="jobTitle">Pozicija</label>
+    <input
+      id="jobTitle"
+      type="text"
+      formControlName="jobTitle"
+      placeholder="QA"
+    />
+    <button type="submit" class="button" [disabled]="employeeForm.invalid">
+      Pošalji
+    </button>
+  </form>
+</section>

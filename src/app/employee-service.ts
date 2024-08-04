@@ -32,7 +32,7 @@ export class EmployeeService {
   private formatBirthDate(dateofBirth: string): string
   {
     const date: Date = new Date(dateofBirth);
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
     return new Intl.DateTimeFormat('en-GB', options).format(date);
   }
 
