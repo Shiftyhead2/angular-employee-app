@@ -10,7 +10,7 @@ import { FormattedEmployee } from '../formatted-employee';
   templateUrl: './employee-listing.component.html',
   styleUrl: './employee-listing.component.css'
 })
-export class EmployeeListingComponent{
-  @Input() employee!:FormattedEmployee;
-  
+export class EmployeeListingComponent {
+  @Input() employee!: FormattedEmployee;
+
 }

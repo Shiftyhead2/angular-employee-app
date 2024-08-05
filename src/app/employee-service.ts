@@ -11,26 +11,30 @@ import { FormattedEmployee } from './formatted-employee';
 })
 export class EmployeeService {
 
-  private apiUrl:string = 'https://api.test.ulaznice.hr/paganini/api/job-interview/employees';
+  private apiUrl: string = 'https://api.test.ulaznice.hr/paganini/api/job-interview/employees';
 
   constructor(private http: HttpClient) { }
 
-  getEmployees(): Observable<FormattedEmployee[]>{
+  getEmployees(): Observable<FormattedEmployee[]> {
     return this.http.get<ApiResponse>(this.apiUrl).pipe(
       map(response => {
         return response.data.map(employee => ({
           id: employee.id,
           name: `${employee.firstName} ${employee.lastName}`,
           jobTitle: employee.jobTitle,
-          birthDate:this.formatBirthDate(employee.dateOfBirth),
+          birthDate: this.formatBirthDate(employee.dateOfBirth),
         }));
       })
     )
   }
 
+  getUniqueJobTitles(employees: FormattedEmployee[]): string[] {
+    const jobTitles = new Set(employees.map(employee => employee.jobTitle));
+    return Array.from(jobTitles);
+  }
 
-  private formatBirthDate(dateofBirth: string): string
-  {
+
+  private formatBirthDate(dateofBirth: string): string {
     const date: Date = new Date(dateofBirth);
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
     return new Intl.DateTimeFormat('en-GB', options).format(date);

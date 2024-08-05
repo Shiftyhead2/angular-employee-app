@@ -6,16 +6,16 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: '/home',
-    pathMatch:'full'
+    pathMatch: 'full'
   },
   {
     path: 'employee-form',
     title: 'Employee Form',
-    component:EmployeeFormComponent,
+    component: EmployeeFormComponent,
   },
   {
     path: 'home',
     title: 'Home',
-    component:HomeComponent,
+    component: HomeComponent,
   },
 ];

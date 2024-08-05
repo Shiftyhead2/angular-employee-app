@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup,ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeListingComponent } from '../employee-listing/employee-listing.component';
 import { EmployeeService } from '../employee-service';
 import { FormattedEmployee } from '../formatted-employee';
@@ -11,28 +11,37 @@ import { of } from 'rxjs';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [EmployeeListingComponent,CommonModule,ReactiveFormsModule],
+  imports: [EmployeeListingComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   allEmployees: FormattedEmployee[] = [];
   filteredEmployees: FormattedEmployee[] = [];
+  allJobTitles: string[] = [];
 
-  filterOptions: string[] = ['Imenu', 'Prezimenu', 'Poziciji'];
+
   selectedFilterOption: string = '';
   filterForm: FormGroup;
 
+  sortOptions: string[] = ['Imenu', 'Prezimenu', 'Poziciji'];
+  selectedSortOption: string = '';
+  sortForm: FormGroup;
 
 
-  constructor(private employeeService: EmployeeService, private fb: FormBuilder)
-  {
+
+  constructor(private employeeService: EmployeeService, private fb: FormBuilder) {
     this.filterForm = this.fb.group({
-      filterSelect: new FormControl<string>(this.filterOptions[0]),
-      filterInput: new FormControl<string>('')
+      filterSelect: new FormControl<string>('None'),
+      findInput: new FormControl<string>('')
     });
 
-    this.selectedFilterOption = this.filterOptions[0];
+    this.sortForm = this.fb.group({
+      sortSelect: new FormControl<string>('None'),
+    })
+
+    this.selectedFilterOption = 'None';
+    this.selectedSortOption = "None";
   }
 
 
@@ -41,51 +50,57 @@ export class HomeComponent implements OnInit {
       tap(data => {
         this.allEmployees = data;
         this.filteredEmployees = data;
+        this.allJobTitles = this.employeeService.getUniqueJobTitles(data);
       }),
       catchError(error => {
         console.error('Error fetching employees:', error);
         return of([]);
       })
     ).subscribe();
+
+    this.filterForm.valueChanges.subscribe(() => this.applyFilterAndSort());
+    this.sortForm.valueChanges.subscribe(() => this.applyFilterAndSort());
   }
 
+  applyFilterAndSort(): void {
+    this.selectedFilterOption = this.filterForm.value.filterSelect || this.allJobTitles[0];
+    this.selectedSortOption = this.sortForm.value.sortSelect || 'None';
+    const inputValue: string = (this.filterForm.value.findInput || '').toLowerCase();
 
-  applyFilter(): void
-  {
-    this.selectedFilterOption = this.filterForm.value.filterSelect;
-    if (this.filterForm.get('filterInput')?.value)
-    {
-      this.filterEmployeesBy();
+    // Apply filter
+    this.filteredEmployees = this.allEmployees.filter(employee => {
+      let match = true;
+
+      if (this.selectedFilterOption !== 'None') {
+        match = employee.jobTitle.toLowerCase().includes(this.selectedFilterOption.toLowerCase());
+      }
+
+      if (inputValue) {
+        match = match && (
+          employee.name.toLowerCase().includes(inputValue)
+        );
+      }
+
+      return match;
+    });
+
+
+
+    // Apply sort
+    if (this.selectedSortOption === 'None') {
+      this.filteredEmployees = [...this.filteredEmployees];
+    } else if (this.selectedSortOption === this.sortOptions[0]) { // Sort by first name
+      this.filteredEmployees.sort((a, b) =>
+        a.name.split(' ')[0].localeCompare(b.name.split(' ')[0])
+      );
+    } else if (this.selectedSortOption === this.sortOptions[1]) { // Sort by last name
+      this.filteredEmployees.sort((a, b) =>
+        (a.name.split(' ')[1] || '').localeCompare(b.name.split(' ')[1] || '')
+      );
+    } else { // Sort by job title
+      this.filteredEmployees.sort((a, b) =>
+        a.jobTitle.localeCompare(b.jobTitle)
+      );
     }
   }
-
-  filterEmployeesBy(): void
-  {
-    const value: string = this.filterForm.value.filterInput.toLowerCase();
-    if (!value)
-    {
-      this.filteredEmployees = this.allEmployees;
-      return;
-    }
-    
-    if (this.selectedFilterOption === this.filterOptions[0])
-    {
-      this.filteredEmployees = this.allEmployees.filter(employee =>
-        employee.name.split(' ')[0].toLowerCase().includes(value)
-      );
-    }
-    else if (this.selectedFilterOption === this.filterOptions[1])
-    {
-      this.filteredEmployees = this.allEmployees.filter(employee =>
-        employee.name.split(' ')[1].toLowerCase().includes(value)
-      );
-    }
-    else
-    {
-      this.filteredEmployees = this.allEmployees.filter(employee =>
-        employee.jobTitle.toLowerCase().includes(value)
-      );
-     }
-  }
-  
 }
