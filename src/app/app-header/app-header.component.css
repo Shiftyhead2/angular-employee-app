@@ -1,0 +1,194 @@
+header{
+  position: sticky;
+  top:0;
+}
+
+nav{
+  height: 60px;
+  background-color: var(--dark);
+  display: flex;
+  justify-content: end;
+  position: relative;
+}
+
+nav::after
+{
+  position: absolute;
+  content: '';
+  height: 2px;
+  width: 100%;
+  bottom: 0;
+  background-color: var(--outline);
+}
+
+
+.links-container
+{
+  height: 100%;
+  width: 100%;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+nav a,h1{
+  height: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color:var(--grey);
+}
+
+nav h1{
+  pointer-events: none;
+  font-weight: 800;
+}
+
+
+
+nav a,
+nav svg
+{
+  transition: all 0.25s ease-in;
+}
+
+nav a:hover
+{
+  background-color: var(--primary-hovered);
+  color:var(--light);
+}
+
+nav .active
+{
+  color:var(--active);
+}
+
+nav .title
+{
+  margin-right: auto;
+}
+
+nav svg{
+  fill:var(--grey);
+  cursor: pointer;
+}
+
+nav svg:hover
+{
+  fill:var(--light);
+}
+
+#sidebar-active{
+  display:none;
+}
+
+.open-sidebar-button,
+.close-sidebar-button,
+.hideOnLargerScreens
+{
+  display:none;
+}
+
+.links-container::after
+{
+  display:none;
+  position: absolute;
+  content: '';
+  background-color: var(--outline);
+  height: 100%;
+  width: 2px;
+  right:300px;
+}
+
+@media(max-width:530px)
+{
+  .links-container{
+    flex-direction: column;
+    align-items: flex-start;
+    
+
+    position: fixed;
+    top:0;
+    right: -100%;
+    z-index:10;
+    width:300px;
+    background-color: var(--dark);
+    transition: 0.75s ease-out;
+  }
+
+  #show0nSmallerMobileScreens{
+    display: none;
+  }
+
+  .links-container::after
+  {
+    display: block;
+    
+  }
+
+  nav a,h1
+  {
+    height:auto;
+    width: 100%;
+    padding: 20px 30px;
+    justify-content: flex-start;
+  }
+
+  .open-sidebar-button,
+  .close-sidebar-button,
+  .hideOnLargerScreens
+  {
+    display:block;
+  }
+
+  .open-sidebar-button,
+  .close-sidebar-button
+  {
+    padding: 13px;
+  }
+
+  .hideOnLargerScreens{
+    height: 100%;
+    padding: 14px 20px;
+  }
+
+  #sidebar-active:checked ~ .links-container
+  {
+    right:0;
+  }
+  
+  #sidebar-active:checked ~ #overlay{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 9;
+  }
+}
+
+@media(max-width:400px)
+{
+  .links-container
+  {
+    width: 100%;
+    align-items: center;
+  }
+
+  .links-container::after{
+    display: none;
+  }
+
+  .close-sidebar-button{
+    width: 100%;
+  }
+
+  #show0nSmallerMobileScreens{
+    display: block;
+  }
+
+  .title{
+    text-align: center;
+  }
+}

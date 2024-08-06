@@ -1,32 +1,25 @@
-<section class="wrapper">
-  <section class="filterFormSection">
-    <form [formGroup]="filterForm">
-      <label>Filtriraj po poziciji:</label>
-      <select formControlName="filterSelect">
-        <option value="None">Sve</option>
-        <option *ngFor="let jobTitle of allJobTitles" [value]="jobTitle">
-          {{ jobTitle }}
-        </option>
-      </select>
-      <input
-        type="text"
-        placeholder="Upišite ovdje"
-        formControlName="findInput"
-      />
-    </form>
-  </section>
-
-  <section class="sortFormSection">
-    <form [formGroup]="sortForm">
-      <label>Sortiraj po:</label>
-      <select formControlName="sortSelect">
-        <option value="None">Ničemu</option>
-        <option *ngFor="let sortOption of sortOptions" [value]="sortOption">
-          {{ sortOption }}
-        </option>
-      </select>
-    </form>
-  </section>
+<section class="filterFormSection">
+  <form [formGroup]="filterForm">
+    <label>Filtriraj po poziciji:</label>
+    <select formControlName="filterSelect">
+      <option value="None">Sve</option>
+      <option *ngFor="let jobTitle of allJobTitles" [value]="jobTitle">
+        {{ jobTitle }}
+      </option>
+    </select>
+    <input
+      type="text"
+      placeholder="Upišite ovdje"
+      formControlName="findInput"
+    />
+    <label>Sortiraj po:</label>
+    <select formControlName="sortSelect">
+      <option value="None">Ničemu</option>
+      <option *ngFor="let sortOption of sortOptions" [value]="sortOption">
+        {{ sortOption }}
+      </option>
+    </select>
+  </form>
 </section>
 
 <section class="results" *ngIf="filteredEmployees.length > 0; else noEmployees">

@@ -26,19 +26,15 @@ export class HomeComponent implements OnInit {
 
   sortOptions: string[] = ['Imenu', 'Prezimenu', 'Poziciji'];
   selectedSortOption: string = '';
-  sortForm: FormGroup;
 
 
 
   constructor(private employeeService: EmployeeService, private fb: FormBuilder) {
     this.filterForm = this.fb.group({
       filterSelect: new FormControl<string>('None'),
-      findInput: new FormControl<string>('')
-    });
-
-    this.sortForm = this.fb.group({
+      findInput: new FormControl<string>(''),
       sortSelect: new FormControl<string>('None'),
-    })
+    });
 
     this.selectedFilterOption = 'None';
     this.selectedSortOption = "None";
@@ -59,12 +55,11 @@ export class HomeComponent implements OnInit {
     ).subscribe();
 
     this.filterForm.valueChanges.subscribe(() => this.applyFilterAndSort());
-    this.sortForm.valueChanges.subscribe(() => this.applyFilterAndSort());
   }
 
   applyFilterAndSort(): void {
     this.selectedFilterOption = this.filterForm.value.filterSelect || this.allJobTitles[0];
-    this.selectedSortOption = this.sortForm.value.sortSelect || 'None';
+    this.selectedSortOption = this.filterForm.value.sortSelect || 'None';
     const inputValue: string = (this.filterForm.value.findInput || '').toLowerCase();
 
     // Apply filter
