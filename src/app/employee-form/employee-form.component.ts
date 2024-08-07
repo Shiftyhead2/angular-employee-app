@@ -24,7 +24,23 @@ export class EmployeeFormComponent {
   }
 
   onSubmit(): void {
-    console.log('Submitted form:', this.employeeForm.value);
+    console.log(`Submitted form:\nIme:${this.employeeForm.value.firstName} ${this.employeeForm.value.lastName}\nGodina rođenja:${this.employeeForm.value.dateOfBirth}\nPozicija:${this.employeeForm.value.jobTitle}`);
     this.employeeForm.reset();
+  }
+
+  get firstName() {
+    return this.employeeForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.employeeForm.get('lastName');
+  }
+
+  get dateOfBirth() {
+    return this.employeeForm.get('dateOfBirth');
+  }
+
+  get jobTitle() {
+    return this.employeeForm.get('jobTitle');
   }
 }

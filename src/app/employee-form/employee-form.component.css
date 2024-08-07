@@ -1,0 +1,110 @@
+.employeeForm
+{
+  width: 100%;
+  height: 980px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employeeForm form{
+  height: 60%;
+  display: grid;
+  place-items: center;
+  width: 30%;
+  background-color: var(--dark);
+  color: var(--light);
+  outline: 2px solid var(--outline);
+  font-size: 1rem;
+}
+
+.employeeForm .form-wrapper
+{
+  display: grid;
+  text-align: center;
+  gap:0.5rem;
+}
+
+.employeeForm .employeeForm:not(button) 
+{
+  width: 50%;
+}
+
+.error{
+  font-size: 0.65rem;
+  color:red;
+}
+
+.employeeForm input
+{
+  font-family: inherit;
+  outline:none;
+  background-color: var(--light);
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  transition: 0.25s ease-out;
+}
+
+.employeeForm input:hover,
+.employeeForm input:focus
+{
+  
+  outline:3px solid var(--active);
+}
+
+.employeeForm input.invalid
+{
+  outline:3px solid red;
+}
+
+
+
+.employeeForm button{
+  padding: 10px 35px;
+  font-family: inherit;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color:var(--grey);
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.employeeForm button:disabled
+{
+  background-color: var(--disabled);
+  cursor: default;
+  pointer-events: none;
+  color:var(--dark);
+}
+
+.employeeForm button:hover
+{
+  background-color: var(--primary-hovered);
+  color:var(--light);
+}
+
+
+@media (max-width:900px)
+{
+  .employeeForm
+  {
+    height: 620px;
+  }
+}
+
+@media (max-width:530px)
+{
+  .employeeForm
+  {
+    height: 575px;
+  }
+
+  .employeeForm form
+  {
+    width: 70%;
+    height: 70%;
+  }
+}
+

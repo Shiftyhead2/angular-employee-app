@@ -1,35 +1,89 @@
 <section class="employeeForm">
   <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-    <label for="firstName">Ime</label>
-    <input
-      id="firstName"
-      type="text"
-      formControlName="firstName"
-      placeholder="John"
-    />
-    <label for="lastName">Prezime</label>
-    <input
-      id="lastName"
-      type="text"
-      formControlName="lastName"
-      placeholder="Doe"
-    />
-    <label for="dateOfBirth">Datum rođenja</label>
-    <input
-      id="dateOfBirth"
-      type="text"
-      formControlName="dateOfBirth"
-      placeholder="DD/MM/YYYY"
-    />
-    <label for="jobTitle">Pozicija</label>
-    <input
-      id="jobTitle"
-      type="text"
-      formControlName="jobTitle"
-      placeholder="QA"
-    />
-    <button type="submit" class="button" [disabled]="employeeForm.invalid">
-      Pošalji
-    </button>
+    <div class="form-wrapper">
+      <label for="firstName">Ime</label>
+      <input
+        id="firstName"
+        type="text"
+        formControlName="firstName"
+        placeholder="John"
+        [class.invalid]="
+          firstName?.invalid && (firstName?.dirty || firstName?.touched)
+        "
+      />
+      <span class="error" *ngIf="firstName?.touched || firstName?.dirty">
+        <ng-container *ngIf="firstName?.hasError('required')">
+          Ovo polje je potrebno!
+        </ng-container>
+        <ng-container *ngIf="firstName?.hasError('minlength')">
+          Ime mora imati najmanje 2 znaka!
+        </ng-container>
+      </span>
+    </div>
+    <div class="form-wrapper">
+      <label for="lastName">Prezime</label>
+      <input
+        id="lastName"
+        type="text"
+        formControlName="lastName"
+        placeholder="Doe"
+        [class.invalid]="
+          lastName?.invalid && (lastName?.dirty || lastName?.touched)
+        "
+      />
+      <span class="error" *ngIf="lastName?.touched || lastName?.dirty">
+        <ng-container *ngIf="lastName?.hasError('required')">
+          Ovo polje je potrebno!
+        </ng-container>
+        <ng-container *ngIf="lastName?.hasError('minlength')">
+          Prezime mora imati najmanje 2 znaka!
+        </ng-container>
+      </span>
+    </div>
+    <div class="form-wrapper">
+      <label for="dateOfBirth">Datum rođenja</label>
+      <input
+        id="dateOfBirth"
+        type="text"
+        formControlName="dateOfBirth"
+        placeholder="DD/MM/YYYY"
+        [class.invalid]="
+          dateOfBirth?.invalid && (dateOfBirth?.dirty || dateOfBirth?.touched)
+        "
+      />
+      <span class="error" *ngIf="dateOfBirth?.touched || dateOfBirth?.dirty">
+        <ng-container *ngIf="dateOfBirth?.hasError('required')">
+          Ovo polje je potrebno!
+        </ng-container>
+        <ng-container *ngIf="dateOfBirth?.hasError('minlength')">
+          Datum mora biti u točnom formatu!
+        </ng-container>
+      </span>
+    </div>
+    <div class="form-wrapper">
+      <label for="jobTitle">Pozicija</label>
+      <input
+        id="jobTitle"
+        type="text"
+        formControlName="jobTitle"
+        placeholder="QA"
+        [class.invalid]="
+          jobTitle?.invalid && (jobTitle?.dirty || jobTitle?.touched)
+        "
+      />
+      <span class="error" *ngIf="jobTitle?.touched || jobTitle?.dirty">
+        <ng-container *ngIf="jobTitle?.hasError('required')">
+          Ovo polje je potrebno!
+        </ng-container>
+        <ng-container *ngIf="jobTitle?.hasError('minlength')">
+          Pozicija mora imati najmanje 2 znaka!
+        </ng-container>
+      </span>
+    </div>
+    <div class="form-wrapper">
+      <button type="submit" class="button" [disabled]="employeeForm.invalid">
+        Spremi
+      </button>
+    </div>
   </form>
 </section>

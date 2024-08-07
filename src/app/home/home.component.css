@@ -58,9 +58,8 @@ label{
   width:350px;
   font-family: inherit;
   padding: 5px 35px;
-  outline: none;
-  border: none;
-  border: 3px solid transparent;
+  outline: 3px solid transparent;;
+  border: none; 
   background-color: var(--light);
   border-radius: 10px;
   transition: all 0.25s ease-out;
@@ -69,7 +68,7 @@ label{
 .form-input-container input:focus,
 .form-input-container input:hover
 {
-  border: 3px solid var(--active);
+  outline: 3px solid var(--active);
 }
 
 .form-input-container svg
@@ -77,7 +76,7 @@ label{
   position: absolute;
   right:5px;
   fill: var(--dark);
-  top:8px;
+  top:5px;
 }
 
 .form-dropdown-container
@@ -142,6 +141,7 @@ label{
     
     font-size: 0.80rem;
   }
+
 
   label{
     font-size: 0.85rem;
