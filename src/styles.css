@@ -4,12 +4,14 @@
 :root{
   --primary:#192a56;
   --primary-hovered:#273c75;
-  --dark:#2d3436;
-  --background-dark:#636e72;
+  --dark:#2f3640;
+  --background-dark:#353b48;
   --grey:#f1f2f6;
   --light:#ffffff;
   --active:#00a8ff;
   --outline:#fbc531;
+  --disabled:#718093;
+  --card:#718093;
 }
 
 *{

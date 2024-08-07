@@ -1,6 +1,7 @@
 header{
   position: sticky;
   top:0;
+  z-index: 5;
 }
 
 nav{
@@ -38,6 +39,7 @@ nav a,h1{
   align-items: center;
   text-decoration: none;
   color:var(--grey);
+  text-transform: uppercase;
 }
 
 nav h1{
@@ -57,11 +59,13 @@ nav a:hover
 {
   background-color: var(--primary-hovered);
   color:var(--light);
+  text-decoration: underline;
 }
 
 nav .active
 {
   color:var(--active);
+  text-decoration: underline;
 }
 
 nav .title
@@ -114,7 +118,7 @@ nav svg:hover
     z-index:10;
     width:300px;
     background-color: var(--dark);
-    transition: 0.75s ease-out;
+    transition: 0.50s ease-out;
   }
 
   #show0nSmallerMobileScreens{
