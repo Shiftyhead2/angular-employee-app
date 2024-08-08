@@ -74,9 +74,9 @@ label{
 .form-input-container svg
 {
   position: absolute;
-  right:5px;
+  left:8px;
   fill: var(--dark);
-  top:5px;
+  top:2px;
 }
 
 .form-dropdown-container
@@ -140,6 +140,13 @@ label{
   .form-input-container input::placeholder{
     
     font-size: 0.80rem;
+  }
+
+  .form-input-container svg{
+    width:18px;
+    height: 18px;
+    left:3px;
+    top:5px;
   }
 
 

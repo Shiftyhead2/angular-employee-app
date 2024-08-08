@@ -20,6 +20,7 @@
 
 .employeeForm .form-wrapper
 {
+  position: relative;
   display: grid;
   text-align: center;
   gap:0.5rem;
@@ -83,6 +84,14 @@
 {
   background-color: var(--primary-hovered);
   color:var(--light);
+}
+
+.employeeForm svg
+{
+  position: absolute;
+  top:31px;
+  right:4px;
+  fill:var(--dark);
 }
 
 
